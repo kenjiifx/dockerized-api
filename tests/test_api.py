@@ -6,13 +6,15 @@ from datetime import datetime
 import pytest
 from fastapi.testclient import TestClient
 
+# Import app first
 from app.main import app
+from app.config import settings
 
-# Set test environment variables
-os.environ["SERVICE_NAME"] = "test-service"
-os.environ["ENV"] = "test"
-os.environ["LOG_LEVEL"] = "DEBUG"
-os.environ["GIT_SHA"] = "test-sha-123"
+# Patch settings for tests
+settings.SERVICE_NAME = "test-service"
+settings.ENV = "test"
+settings.LOG_LEVEL = "DEBUG"
+settings.GIT_SHA = "test-sha-123"
 
 client = TestClient(app)
 
